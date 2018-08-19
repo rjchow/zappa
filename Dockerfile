@@ -9,6 +9,8 @@ COPY yum.conf /etc/yum.conf
 # Fix for slow yum metadata https://github.com/danielwhatmuff/zappa/issues/4
 RUN if ! [[ -z "$region" ]]; then echo $region > /etc/yum/vars/awsregion; fi
 
+RUN touch /var/lib/rpm/*
+
 RUN yum clean all && \
     yum -y install virtualenv vim postgresql postgresql-devel mysql mysql-devel gcc lapack-devel blas-devel libyaml-devel wget && \
     cd /usr/src && \
